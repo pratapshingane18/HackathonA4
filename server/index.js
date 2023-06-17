@@ -8,14 +8,21 @@ const app = express()
 
 
 const routes = require('./routes/routes')
-const connect = require('./config/dbconnect')
+const Connect = require('./config/dbconnect')
 
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 
 app.use(cors())
 app.use(express.json())
 app.use(bodyParser.urlencoded({extended: false}))
 
+Connect(process.env.MONGO_DB_URL);
+
 app.use('/api/',routes);
+
+
+app.listen(port,()=>{
+    console.log("Listening to ", port);
+})
