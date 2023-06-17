@@ -22,4 +22,9 @@ export const UserSchema = new mongoose.Schema({
     firstname: {type: string},
     lastname: {type: string},
     mobile:{type:string},
-})
+    address: {type: string},
+    profile: {type:string}
+
+});
+
+export default mongoose.model.Users || mongoose.model('User',UserSchema);
