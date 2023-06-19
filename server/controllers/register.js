@@ -1,6 +1,5 @@
-
-// const bcrypt = require("bcrypt");
-const User = require("../models/users");
+const bcrypt = require("bcrypt");
+const User = require("../models/student");
 
 class Register {
   static register = async (req, res) => {
@@ -12,36 +11,36 @@ class Register {
     const userId = req.body.userId;
     const password = req.body.password;
     const cpassword = req.body.cpassword;
-    const role = req.body.role;
+    const email = req.body.email;
+    const branch = req.body.branch;
+    const year = req.body.year;
     // const dateofbirth = req.body.DOB;
 
     //Checking if exist or not
     const user = await User.findOne({ userId: userId }).lean();
 
-
     if (user) {
       res.json({ status: "failed", message: "User Already Exist!!" });
       console.log(user);
     } else {
-
       //Checking all properties are fulfilled
       if (firstname && userId && password) {
-
         //matching the passwords
         if (password == cpassword) {
           try {
-
             //Generating a hash
-            // const salt = await bcrypt.genSalt(10);
-            // const hash_password = await bcrypt.hash(password, salt);
+            const salt = await bcrypt.genSalt(10);
+            const hash_password = await bcrypt.hash(password, salt);
 
             //Building a model document of user
             const doc = new User({
               firstname: firstname,
               lastname: lastname,
-              user_id: userId,
+              userId: userId,
               password: password,
-              role: role, 
+              email: email,
+              branch: branch,
+              year: year,
             });
 
             //saving it
@@ -57,7 +56,7 @@ class Register {
             } else {
               res.json({
                 status: "failed",
-                message: "Registration UnSuccessful and not saved",
+                message: "Registration Unsuccessful and not saved",
               });
             }
           } catch (err) {
@@ -77,8 +76,11 @@ class Register {
         res.json({ status: "failed", message: "All feilds are required" });
       }
     }
-
   };
+
+
+
+
   static login = async (req, res) => {
     // res.send('Login here');
 
@@ -89,18 +91,16 @@ class Register {
 
     if (user) {
       if (password) {
-        // const checkpass = await bcrypt.compareSync(password, user.password);
-        
-        if (user.user_id === userId && user.password === password) {
+        const checkpass = await bcrypt.compareSync(password, user.password);
 
+        if (user.user_id === userId && checkpass) {
           console.log("Login Successfully");
           res.status(201).json({
             status: "success",
             message: "Login Successful",
 
-            user_id: user.user_id,
-            role: user.role
-
+            userId: user.userId,
+            
           });
         } else {
           console.log("Login Unsuccessful");
@@ -110,8 +110,6 @@ class Register {
           };
 
           res.json(result);
-          
-
         }
       } else {
         console.log("All feilds are required");
@@ -124,7 +122,6 @@ class Register {
         message: "User not found! Please register",
       });
     }
-
   };
 }
 
