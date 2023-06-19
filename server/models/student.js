@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export const UserSchema = new mongoose.Schema({
+export const Student = new mongoose.Schema({
     firstname: {type: string},
     lastname: {type: string},
     userId: {
@@ -28,4 +28,4 @@ export const UserSchema = new mongoose.Schema({
 
 });
 
-export default mongoose.model.Users || mongoose.model('User',UserSchema);
+export default mongoose.model('Student',Student);

@@ -1,9 +1,9 @@
 const bcrypt = require("bcrypt");
-const User = require("../models/student");
+const Student = require("../models/student");
 
 class Register {
   static register = async (req, res) => {
-    // res.send('Register here');
+    
 
     //Body properties
     const firstname = req.body.firstname;
@@ -14,10 +14,11 @@ class Register {
     const email = req.body.email;
     const branch = req.body.branch;
     const year = req.body.year;
-    // const dateofbirth = req.body.DOB;
+    const degree = req.body.degree;
+    
 
     //Checking if exist or not
-    const user = await User.findOne({ userId: userId }).lean();
+    const user = await Student.findOne({ userId: userId }).lean();
 
     if (user) {
       res.json({ status: "failed", message: "User Already Exist!!" });
@@ -33,7 +34,7 @@ class Register {
             const hash_password = await bcrypt.hash(password, salt);
 
             //Building a model document of user
-            const doc = new User({
+            const doc = new Student({
               firstname: firstname,
               lastname: lastname,
               userId: userId,
@@ -41,12 +42,13 @@ class Register {
               email: email,
               branch: branch,
               year: year,
+              degree: degree
             });
 
             //saving it
             await doc.save();
 
-            const saved = await User.findOne({ user_id: userId });
+            const saved = await Student.findOne({ user_id: userId });
 
             if (saved) {
               res.json({
@@ -82,12 +84,13 @@ class Register {
 
 
   static login = async (req, res) => {
-    // res.send('Login here');
+    
 
     const userId = req.body.userId;
     const password = req.body.password;
-    // const
-    const user = await User.findOne({ user_id: userId }).lean();
+    
+
+    const user = await Student.findOne({ user_id: userId }).lean();
 
     if (user) {
       if (password) {
