@@ -39,7 +39,7 @@ export async function authenticate(username){
 /** register user function */
 export async function registerUser(credentials){
     try {
-        const { data : { msg }, status } = await axios.post(`/api/register`, credentials);
+        const { data : { msg }, status } = await axios.post(`http://localhost:8080/api/register`, credentials);
 
         let { username, email } = credentials;
 

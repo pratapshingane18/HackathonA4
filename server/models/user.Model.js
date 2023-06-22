@@ -19,11 +19,11 @@ export const UserSchema = new mongoose.Schema({
         unique: true,
     },
 
-    firstname: {type: string},
-    lastname: {type: string},
-    mobile:{type:string},
-    address: {type: string},
-    profile: {type:string}
+    firstname: {type: String},
+    lastname: {type: String},
+    mobile:{type:String},
+    address: {type: String},
+    profile: {type:String}
 
 });
 
