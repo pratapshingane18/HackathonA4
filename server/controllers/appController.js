@@ -1,7 +1,7 @@
 import UserModel from '../models/user.model.js'
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import ENV from '../config.js';
+import ENV from '../config.js'
 import otpGenerator from 'otp-generator';
 
 /** middleware for verify user */
@@ -48,6 +48,8 @@ res.send({"message":"working"});
                 resolve();
             })
         });
+
+
 
         // check for existing email
         const existEmail = new Promise((resolve, reject) => {
