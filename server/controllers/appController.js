@@ -1,4 +1,4 @@
-import UserModel from '../model/User.model.js'
+import UserModel from '../models/user.model.js'
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import ENV from '../config.js'
@@ -34,10 +34,11 @@ export async function verifyUser(req, res, next){
 }
 */
 export async function register(req,res){
-
+res.send({"message":"working"});
     try {
         const { username, password, profile, email } = req.body;        
 
+        console.log("working")
         // check the existing user
         const existUsername = new Promise((resolve, reject) => {
             UserModel.findOne({ username }, function(err, user){
