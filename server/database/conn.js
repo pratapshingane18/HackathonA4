@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 import { MongoMemoryServer } from "mongodb-memory-server";
 // import { ATLAS_URI } from "../config/config.js";
-import ENV  from "../config.js";
+import ENV  from "../config/config.js";
 // const url = "mongodb+srv://AmanAgrawal:Elective%40123@elective.cph0axl.mongodb.net/?retryWrites=true&w=majority";
 
 async function connect(){
