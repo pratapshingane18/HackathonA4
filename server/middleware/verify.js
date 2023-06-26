@@ -1,8 +1,8 @@
-import UserModel from '../model/User.model.js'
+import {UserModel} from '../models/user.Model.js'
 
 
 /** middleware for verify user */
-export async function verifyUser(req, res, next){
+export default async function verifyUser(req, res, next){
     try {
         
         const { username } = req.method == "GET" ? req.query : req.body;

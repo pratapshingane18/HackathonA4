@@ -1,7 +1,7 @@
-import UserModel from '../models/user.model.js'
+import {UserModel} from '../models/user.Model.js'
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import ENV from '../config.js'
+import ENV from '../config/config.js'
 import otpGenerator from 'otp-generator';
 
 /** middleware for verify user */

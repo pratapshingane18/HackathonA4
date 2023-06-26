@@ -1,4 +1,4 @@
-import UserModel from '../model/User.model.js'
+import {UserModel} from '../models/user.Model.js'
 import bcrypt from 'bcrypt';
 // import jwt from 'jsonwebtoken';
 // import ENV from '../config.js';
@@ -16,7 +16,7 @@ import bcrypt from 'bcrypt';
   "profile": ""
 }
 */
-export async function register(req,res){
+export default async function register(req,res){
 
   try {
       const { username, password, profile, email } = req.body;        
@@ -54,7 +54,7 @@ export async function register(req,res){
                               profile: profile || '',
                               email
                           });
-
+                        console.log("Done");
                           // return save result as a response
                           user.save()
                               .then(result => res.status(201).send({ msg: "User Register Successfully"}))

@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import Mailgen from 'mailgen';
 
-import ENV from '../config.js';
+import ENV from '../config/config.js';
 
 
 // https://ethereal.email/create
