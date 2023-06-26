@@ -1,8 +1,5 @@
-import {UserModel} from '../models/user.Model.js'
-import bcrypt from 'bcrypt';
-// import jwt from 'jsonwebtoken';
-// import ENV from '../config.js';
-// import otpGenerator from 'otp-generator';
+import { UserModel } from "../models/user.Model.js";
+import bcrypt from "bcrypt";
 
 /** POST: http://localhost:8080/api/register 
  * @param : {
@@ -16,199 +13,65 @@ import bcrypt from 'bcrypt';
   "profile": ""
 }
 */
-export default async function register(req,res){
-
+export default async function register(req, res) {
   try {
-      const { username, password, profile, email } = req.body;        
+    const {
+      username,
+      password,
+      email,
+      firstname,
+      lastname,
+      mobile,
+      address,
+      profile,
+    } = req.body;
 
-      // check the existing user
-      const existUsername = new Promise((resolve, reject) => {
-          UserModel.findOne({ username }, function(err, user){
-              if(err) reject(new Error(err))
-              if(user) reject({ error : "Please use unique username"});
+    // check the existing user
+    const existUsername = await UserModel.findOne({ username });
+    // check for existing email
+   
 
-              resolve();
-          })
-      });
-
-      // check for existing email
-      const existEmail = new Promise((resolve, reject) => {
-          UserModel.findOne({ email }, function(err, email){
-              if(err) reject(new Error(err))
-              if(email) reject({ error : "Please use unique Email"});
-
-              resolve();
-          })
-      });
+    const existEmail = await UserModel.findOne( {email });
 
 
-      Promise.all([existUsername, existEmail])
-          .then(() => {
-              if(password){
-                  bcrypt.hash(password, 10)
-                      .then( hashedPassword => {
-                          
-                          const user = new UserModel({
-                              username,
-                              password: hashedPassword,
-                              profile: profile || '',
-                              email
-                          });
-                        console.log("Done");
-                          // return save result as a response
-                          user.save()
-                              .then(result => res.status(201).send({ msg: "User Register Successfully"}))
-                              .catch(error => res.status(500).send({error}))
-
-                      }).catch(error => {
-                          return res.status(500).send({
-                              error : "Enable to hashed password"
-                          })
-                      })
-              }
-          }).catch(error => {
-              return res.status(500).send({ error })
-          })
+    const salt = await bcrypt.genSalt(10);
 
 
-  } catch (error) {
-      return res.status(500).send(error);
+    if (existEmail || existUsername) {
+      res.json({ error: "user existt" });
+    } else {
+      if (password) {
+        // bcrypt
+        //   .hash(password, salt)
+        //   .then((hashedPassword) => {
+            const salt = await bcrypt.genSalt(10);
+            const hash_password = await bcrypt.hash(password, salt);
+
+            const user = new UserModel({
+              username: username,
+              password: hash_password,
+              email: email,
+              firstName: firstname,
+              lastName: lastname,
+              mobile: mobile,
+              address: address,
+              profile: profile
+            });
+            console.log("Done");
+            // return save result as a response
+            user
+              .save()
+              .then((result) =>
+                res.status(201).send({ msg: "User Register Successfully" })
+              )
+              .catch((error) => res.status(500).send({ error: "Not saved" }));
+          
+         
+          }
+      }
+    } catch (error) {
+    throw error;
+    return res.status(500).json({error:error});
   }
-
 }
 
-
-
-
-
-// const bcrypt = require("bcrypt");
-// const Student = require("../models/student");
-
-// class Register {
-//   static register = async (req, res) => {
-    
-
-//     //Body properties
-//     const firstname = req.body.firstname;
-//     const lastname = req.body.lastname;
-//     const userId = req.body.userId;
-//     const password = req.body.password;
-//     const cpassword = req.body.cpassword;
-//     const email = req.body.email;
-//     const branch = req.body.branch;
-//     const year = req.body.year;
-//     const degree = req.body.degree;
-    
-
-//     //Checking if exist or not
-//     const user = await Student.findOne({ userId: userId }).lean();
-
-//     if (user) {
-//       res.json({ status: "failed", message: "User Already Exist!!" });
-//       console.log(user);
-//     } else {
-//       //Checking all properties are fulfilled
-//       if (firstname && userId && password) {
-//         //matching the passwords
-//         if (password == cpassword) {
-//           try {
-//             //Generating a hash
-//             const salt = await bcrypt.genSalt(10);
-//             const hash_password = await bcrypt.hash(password, salt);
-
-//             //Building a model document of user
-//             const doc = new Student({
-//               firstname: firstname,
-//               lastname: lastname,
-//               userId: userId,
-//               password: password,
-//               email: email,
-//               branch: branch,
-//               year: year,
-//               degree: degree
-//             });
-
-//             //saving it
-//             await doc.save();
-
-//             const saved = await Student.findOne({ user_id: userId });
-
-//             if (saved) {
-//               res.json({
-//                 status: "success",
-//                 message: "Registration Successful",
-//               });
-//             } else {
-//               res.json({
-//                 status: "failed",
-//                 message: "Registration Unsuccessful and not saved",
-//               });
-//             }
-//           } catch (err) {
-//             console.log(err);
-//             res.json({
-//               status: "failed",
-//               message: "Registration UnSuccessful",
-//             });
-//           }
-//         } else {
-//           res.json({
-//             status: "failed",
-//             message: "Password and Confirm Password wasn't matching",
-//           });
-//         }
-//       } else {
-//         res.json({ status: "failed", message: "All feilds are required" });
-//       }
-//     }
-//   };
-
-
-
-
-//   static login = async (req, res) => {
-    
-
-//     const userId = req.body.userId;
-//     const password = req.body.password;
-    
-
-//     const user = await Student.findOne({ user_id: userId }).lean();
-
-//     if (user) {
-//       if (password) {
-//         const checkpass = await bcrypt.compareSync(password, user.password);
-
-//         if (user.user_id === userId && checkpass) {
-//           console.log("Login Successfully");
-//           res.status(201).json({
-//             status: "success",
-//             message: "Login Successful",
-
-//             userId: user.userId,
-            
-//           });
-//         } else {
-//           console.log("Login Unsuccessful");
-//           const result = {
-//             status: "failed",
-//             message: "Please check the credentials",
-//           };
-
-//           res.json(result);
-//         }
-//       } else {
-//         console.log("All feilds are required");
-//         res.json({ status: "failed", message: "All feilds are required" });
-//       }
-//     } else {
-//       console.log("User not found! Please registe");
-//       res.json({
-//         status: "failed",
-//         message: "User not found! Please register",
-//       });
-//     }
-//   };
-// }
-
-// module.exports = Register;

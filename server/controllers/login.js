@@ -1,8 +1,15 @@
 import {UserModel} from '../models/user.Model.js'
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import ENV from '../config.js';
+import ENV from '../config/config.js';
 
+
+/** POST: http://localhost:8080/api/login 
+ * @param: {
+  "username" : "example123",
+  "password" : "admin123"
+}
+*/
 export default async function login(req,res){
    
     const { username, password } = req.body;
