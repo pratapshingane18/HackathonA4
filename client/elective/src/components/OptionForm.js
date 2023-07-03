@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 function OptionForm() {
+  // Array to track form steps
   const formArray = [1, 2, 3];
-  const [formNo, setFormNo] = useState(formArray[0])
+
+  // State variables
+  const [formNo, setFormNo] = useState(formArray[0]);
   const [state, setState] = useState({
     name: '',
     prn: '',
@@ -16,48 +18,68 @@ function OptionForm() {
     choice2: '',
     choice3: '',
     choice4: ''
-  })
+  });
+
+  // Handle input changes
   const inputHandle = (e) => {
     setState({
       ...state,
       [e.target.name]: e.target.value
-    })
-  }
+    });
+  };
+
+  // Go to the next form step
   const next = () => {
     if (formNo === 1 && state.name && state.prn && state.email) {
-      setFormNo(formNo + 1)
-    }
-    else if (formNo === 2 && state.batch && state.dept ) {
-      setFormNo(formNo + 1)
+      setFormNo(formNo + 1);
+    } else if (formNo === 2 && state.batch && state.dept) {
+      setFormNo(formNo + 1);
     } else {
-      toast.error('Please fillup all input field')
+      toast.error('Please fill up all input fields');
     }
-  }
+  };
+
+  // Go to the previous form step
   const pre = () => {
-    setFormNo(formNo - 1)
-  }
+    setFormNo(formNo - 1);
+  };
+
+  // Handle final form submission
   const finalSubmit = () => {
     if (state.choice1 && state.choice2 && state.choice3 && state.choice4) {
-      toast.success('form submit success')
+      toast.success('Form submitted successfully');
     } else {
-      toast.error('Please fillup all input field')
+      toast.error('Please fill up all input fields');
     }
-  }
+  };
+
   return (
     <div className="w-screen h-screen bg-slate-300 flex justify-center items-center">
       <ToastContainer />
       <div className="card w-[370px] rounded-md shadow-md bg-white p-5">
         <div className='flex justify-center items-center'>
+          {/* Render form steps */}
           {
-            formArray.map((v, i) => <><div className={`w-[35px] my-3 text-white rounded-full ${formNo - 1 === i || formNo - 1 === i + 1 || formNo === formArray.length ? 'bg-blue-500' : 'bg-slate-400'} h-[35px] flex justify-center items-center`}>
-              {v}
-            </div>
-              {
-                i !== formArray.length - 1 && <div className={`w-[85px] h-[2px] ${formNo === i + 2 || formNo === formArray.length ? 'bg-blue-500' : 'bg-slate-400'}`}></div>
-              }
-            </>)
+            formArray.map((v, i) => (
+              <>
+                <div
+                  className={`w-[35px] my-3 text-white rounded-full ${formNo - 1 === i || formNo - 1 === i + 1 || formNo === formArray.length ? 'bg-blue-500' : 'bg-slate-400'} h-[35px] flex justify-center items-center`}
+                >
+                  {v}
+                </div>
+                {
+                  // Render connector lines between form steps
+                  i !== formArray.length - 1 && (
+                    <div
+                      className={`w-[85px] h-[2px] ${formNo === i + 2 || formNo === formArray.length ? 'bg-blue-500' : 'bg-slate-400'}`}
+                    ></div>
+                  )
+                }
+              </>
+            ))
           }
         </div>
+  
         
 
 
