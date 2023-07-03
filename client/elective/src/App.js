@@ -41,10 +41,12 @@ const router = createBrowserRouter([
     {
         path : '/password',
         element : <ProtectRoute><Password /></ProtectRoute>
+        
     },
     {
         path : '/profile',
         element : <AuthorizeUser><Profile /></AuthorizeUser>
+       
     },
     {
         path : '/recovery',
