@@ -58,7 +58,7 @@ function OptionForm() {
             </>)
           }
         </div>
-        {
+        {/* {
           formNo === 1 && <div>
             <div className='flex flex-col mb-2'>
               <label htmlFor="name">Name</label>
@@ -82,7 +82,90 @@ function OptionForm() {
               <button onClick={next} className='px-3 py-2 text-lg rounded-md w-full text-white bg-blue-500'>Next</button>
             </div>
           </div>
-        }
+        } */}
+
+
+{
+  formNo === 1 && (
+    <div>
+      <div className='flex flex-col mb-2'>
+        <label htmlFor="name">Name</label>
+        <input
+          value={state.name}
+          onChange={inputHandle}
+          className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
+          type="text"
+          name='name'
+          placeholder='name'
+          id='name'
+        />
+      </div>
+      <div className='flex flex-col mb-2'>
+        <label htmlFor="dept">PRN</label>
+        <input
+          value={state.dept}
+          onChange={inputHandle}
+          className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
+          type="text"
+          name='dept'
+          placeholder='dept name'
+          id='dept'
+        />
+      </div>
+
+      <div className='flex flex-col mb-2'>
+        <label htmlFor="dept">E-mail</label>
+        <input
+          value={state.dept}
+          onChange={inputHandle}
+          className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
+          type="text"
+          name='dept'
+          placeholder='dept name'
+          id='dept'
+        />
+      </div>
+
+
+      <div className='flex flex-col mb-2'>
+        <label htmlFor="batch">Batch</label>
+        <input
+          value={state.batch}
+          onChange={inputHandle}
+          className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
+          type="number"
+          name='batch'
+          placeholder='batch'
+        />
+      </div>
+      <div className='flex flex-col mb-2'>
+        <label htmlFor="place">Place</label>
+        <select
+          value={state.place}
+          onChange={inputHandle}
+          className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
+          name='place'
+          id='place'
+        >
+          <option value="">Select a place</option>
+          <option value="mumbai">Mumbai</option>
+          <option value="delhi">Delhi</option>
+          <option value="bangalore">Bangalore</option>
+        </select>
+      </div>
+      <div className='mt-4 flex justify-center items-center'>
+        <button
+          onClick={next}
+          className='px-3 py-2 text-lg rounded-md w-full text-white bg-blue-500'
+        >
+          Next
+        </button>
+      </div>
+    </div>
+  )
+}
+
+
 
         {
           formNo === 2 && <div>
