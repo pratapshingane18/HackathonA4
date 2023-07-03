@@ -64,14 +64,14 @@ export default async function register(req, res) {
               .then((result) =>
                 res.status(201).send({ msg: "User Register Successfully" })
               )
-              .catch((error) => res.status(500).send({ error: "Not saved" }));
+              .catch((error) => res.status(500).send({ error: "Not saved",msg: "Not saved" }));
           
          
           }
       }
     } catch (error) {
     throw error;
-    return res.status(500).json({error:error});
+    return res.status(500).json({error:error,msg:"NOt able to register"});
   }
 }
 
