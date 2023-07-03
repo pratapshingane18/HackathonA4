@@ -11,7 +11,7 @@ import Recovery from './components/Recovery';
 import Reset from './components/Reset';
 import PageNotFound from './components/PageNotFound';
 import OptionForm from './components/OptionForm';
-
+import Courses from './components/Courses'
 
 
 /** auth middleware */
@@ -32,6 +32,12 @@ const router = createBrowserRouter([
         path : '/optionform',
         element : <OptionForm></OptionForm>
     },
+
+    {
+        path : '/courses',
+        element : <Courses></Courses>
+    },
+
     {
         path : '/password',
         element : <ProtectRoute><Password /></ProtectRoute>
