@@ -18,7 +18,7 @@ export const UserSchema = new mongoose.Schema({
         required: [true, "Please provide a unique email"],
         unique: true,
     },
-
+    role: {type:String,enum:["student","faculty","admin"]},
     firstname: {type: String},
     lastname: {type: String},
     mobile:{type:String},

@@ -12,7 +12,7 @@ const connect = async (url) => {
             console.log(`Connected Successfully with ${db_opt.dbname}`);
         
     }catch(err){
-        console.log(`Error Detected:${err}`)
+        console.log(`Error Detected:${err}`)    
     }
 }
 
