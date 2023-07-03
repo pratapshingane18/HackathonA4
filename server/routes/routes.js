@@ -7,6 +7,9 @@ import { registerMail } from '../controllers/mailer.js'
 import login from '../controllers/login.js';
 import register  from "../controllers/register.js";
 import * as course from "../controllers/course.js";
+import { allotment } from "../controllers/allotment.js";
+
+
 /* import middlewares */
 import Auth, { localVariables } from '../middleware/auth.js';
 import verifyUser from "../middleware/verify.js";
@@ -20,6 +23,7 @@ router.route('/registerMail').post(registerMail); // send the email
 router.route('/authenticate').post(verifyUser, (req, res) => res.end()); // authenticate user
 router.route('/login').post(verifyUser,login); // login in app
 router.route('/course/submission').post(course.submission);
+router.route('/allotment').post(allotment);
 
 /** GET Methods */
 router.route('/user/:username').get(controller.getUser) // user with username

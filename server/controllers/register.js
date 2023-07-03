@@ -27,14 +27,14 @@ export default async function register(req, res) {
     } = req.body;
 
     // check the existing user
-    const existUsername = await UserModel.findOne({ userId });
+    const existUsername = await UserModel.findOne({ userId:userId });
     if(existUsername){
       console.log("user exists");
       return res.status(500).json({message: "User exist"});
     }
-    
+    // console.log()
     // check for existing email
-    const existEmail = await UserModel.findOne( {email });
+    const existEmail = await UserModel.findOne( {email:email });
 
 
     
@@ -77,9 +77,10 @@ export default async function register(req, res) {
          
           }
       }
-    } catch (error) {
-    throw error;
-    return res.status(500).json({error:error,msg:"NOt able to register"});
+    } catch (error) { 
+      
+      throw error;
+      return res.status(500).json({error:error,msg:"NOt able to register"});
   }
 }
 

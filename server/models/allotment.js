@@ -13,9 +13,8 @@ const allotSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref:'courses',
     required: true,
-    unique: true,
   },
-  cgpa: {
+  cgpa: { 
     type: Number,
     required:true
   },
