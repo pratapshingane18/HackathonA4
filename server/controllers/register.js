@@ -28,12 +28,12 @@ export default async function register(req, res) {
 
     // check the existing user
     const existUsername = await UserModel.findOne({ username });
+    if(existUsername){
+      console.log("user exists");
+      return res.status(500).json({message: "User exist"});
+    }
+    
     // check for existing email
-   if(existUsername){
-    console.log("user exists");
-    return res.status(500).json({message: "User exist"});
-   }
-
     const existEmail = await UserModel.findOne( {email });
 
 
