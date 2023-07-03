@@ -12,11 +12,11 @@ import ENV from '../config/config.js';
 */
 export default async function login(req,res){
    
-    const { username, password } = req.body;
+    const { userId, password } = req.body;
   
     try {
         
-        UserModel.findOne({ username })
+        UserModel.findOne({ userId })
             .then(user => {
                 bcrypt.compare(password, user.password)
                     .then(passwordCheck => {
@@ -25,13 +25,13 @@ export default async function login(req,res){
   
                         // create jwt token
                         const token = jwt.sign({
-                                        userId: user._id,
-                                        username : user.username
+                                        Id: user._id,
+                                        userId : user.userId
                                     }, ENV.JWT_SECRET , { expiresIn : "24h"});
   
                         return res.status(200).send({
                             msg: "Login Successful...!",
-                            username: user.username,
+                            userId: user.userId,
                             token
                         });                                    
   

@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
 export const UserSchema = new mongoose.Schema({
-    username: {
+    userId: {
         type: String,
-        required : [ true, "Please Provide Unique Username "],
+        required : true,
         unique: [true, "Username Exict"]
     },
 
@@ -19,11 +19,21 @@ export const UserSchema = new mongoose.Schema({
         unique: true,
     },
     role: {type:String,enum:["student","faculty","admin"]},
-    firstname: {type: String},
-    lastname: {type: String},
-    mobile:{type:String},
-    address: {type: String},
-    profile: {type:String}
+    firstname: {
+        type: String
+    },
+    lastname: {
+        type: String
+    },
+    mobile:{
+        type:String
+    },
+    address: {
+        type: String
+    },
+    profile: {
+        type:String
+    }
 
 });
  

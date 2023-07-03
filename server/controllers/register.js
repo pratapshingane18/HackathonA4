@@ -16,7 +16,7 @@ import bcrypt from "bcrypt";
 export default async function register(req, res) {
   try {
     const {
-      username,
+      userId,
       password,
       email,
       firstname,
@@ -27,7 +27,7 @@ export default async function register(req, res) {
     } = req.body;
 
     // check the existing user
-    const existUsername = await UserModel.findOne({ username });
+    const existUsername = await UserModel.findOne({ userId });
     if(existUsername){
       console.log("user exists");
       return res.status(500).json({message: "User exist"});
@@ -49,7 +49,7 @@ export default async function register(req, res) {
             const hash_password = await bcrypt.hash(password, salt);
 
             const user = new UserModel({
-              username: username,
+              userId: userId,
               password: hash_password,
               email: email,
               firstName: firstname,

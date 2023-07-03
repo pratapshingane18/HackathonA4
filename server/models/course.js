@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-
 const courseSchema = new mongoose.Schema({
   code: {
     type: String,
@@ -29,10 +28,10 @@ const courseSchema = new mongoose.Schema({
     unique: false,
   },
 
-  type:{
+  type: {
     type: String,
-    enum: ["professional","open"],
-    default: "professional"
+    enum: ["professional", "open"],
+    default: "professional",
   },
   elective: {
     type: String,
@@ -40,11 +39,11 @@ const courseSchema = new mongoose.Schema({
     enum: ["1", "2"],
     default: "1",
   },
-  credits: { 
-    type: Number, 
-    required: true, 
-    default: 2 
-},
+  credits: {
+    type: Number,
+    required: true,
+    default: 2,
+  },
   capacity: {
     type: Number,
     required: true,
@@ -55,7 +54,6 @@ const courseSchema = new mongoose.Schema({
     default: () => {
       return this.capacity;
     },
-    
   },
   limit: {
     type: Number,
