@@ -8,14 +8,14 @@ function OptionForm() {
   const [formNo, setFormNo] = useState(formArray[0])
   const [state, setState] = useState({
     name: '',
-    dept: '',
+    prn: '',
+    email: '',
     batch: '',
-    varsity: '',
-    session: '',
-    address: '',
-    district: '',
-    thana: '',
-    post: ''
+    dept: '',
+    choice1: '',
+    choice2: '',
+    choice3: '',
+    choice4: ''
   })
   const inputHandle = (e) => {
     setState({
@@ -24,10 +24,10 @@ function OptionForm() {
     })
   }
   const next = () => {
-    if (formNo === 1 && state.name && state.dept && state.batch) {
+    if (formNo === 1 && state.name && state.prn && state.email) {
       setFormNo(formNo + 1)
     }
-    else if (formNo === 2 && state.varsity && state.session && state.address) {
+    else if (formNo === 2 && state.batch && state.dept ) {
       setFormNo(formNo + 1)
     } else {
       toast.error('Please fillup all input field')
@@ -37,7 +37,7 @@ function OptionForm() {
     setFormNo(formNo - 1)
   }
   const finalSubmit = () => {
-    if (state.district && state.thana && state.post) {
+    if (state.choice1 && state.choice2 && state.choice3 && state.choice4) {
       toast.success('form submit success')
     } else {
       toast.error('Please fillup all input field')
@@ -101,15 +101,15 @@ function OptionForm() {
         />
       </div>
       <div className='flex flex-col mb-2'>
-        <label htmlFor="dept">PRN</label>
+        <label htmlFor="prn">PRN</label>
         <input
-          value={state.dept}
+          value={state.prn}
           onChange={inputHandle}
           className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
           type="text"
-          name='dept'
-          placeholder='dept name'
-          id='dept'
+          name='prn'
+          placeholder='prn'
+          id='prn'
         />
       </div>
 
@@ -166,8 +166,7 @@ function OptionForm() {
     </div>
   )
 }
-
-
+         
 
         {
           formNo === 2 && <div>
@@ -176,22 +175,22 @@ function OptionForm() {
               <input value={state.varsity} onChange={inputHandle} className='p-2 border border-slate-400 mt-1 outline-0 text-slate-500 focus:border-blue-500 rounded-md' type="text" name='varsity' placeholder='varsity name' id='varsity' />
             </div> */}
 
-      <div className='flex flex-col mb-2'>
-              <label htmlFor="batch">Batch</label>
-              <select
-                value={state.batch}
-                onChange={inputHandle}
-                className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
-                name='batch'
-                id='batch'
-              >
-                <option value="">Select a batch</option>
-                <option value="2023">2023</option>
-                <option value="2024">2024</option>
-                <option value="2025">2025</option>
-                <option value="2026">2026</option>
-              </select>
-            </div>
+<div className='flex flex-col mb-2'>
+            <label htmlFor="batch">Batch</label>
+            <select
+              value={state.batch}
+              onChange={inputHandle}
+              className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
+              name='batch'
+              id='batch'
+            >
+              <option value="">Select a batch</option>
+              <option value="First Year">First Year</option>
+              <option value="Second Year">Second Year</option>
+              <option value="Third Year">Third Year</option>
+              <option value="Final Year">Final Year</option>
+            </select>
+          </div>
 
 
 
@@ -306,7 +305,7 @@ function OptionForm() {
 
 
 
-      
+
             {/* <div className='flex flex-col mb-2'>
               <label htmlFor="district">District</label>
               <input value={state.district} onChange={inputHandle} className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md' type="text" name='district' placeholder='district name' id='district' />
