@@ -10,6 +10,7 @@ import Profile from './components/Profile';
 import Recovery from './components/Recovery';
 import Reset from './components/Reset';
 import PageNotFound from './components/PageNotFound';
+import OptionForm from './components/OptionForm';
 
 
 
@@ -27,10 +28,10 @@ const router = createBrowserRouter([
         element : <Register></Register>
     },
 
-    // {
-    //     path : '/home',
-    //     element : <Home></Home>
-    // },
+    {
+        path : '/optionform',
+        element : <OptionForm></OptionForm>
+    },
     {
         path : '/password',
         element : <ProtectRoute><Password /></ProtectRoute>
