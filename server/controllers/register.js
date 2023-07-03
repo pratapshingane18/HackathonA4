@@ -29,21 +29,22 @@ export default async function register(req, res) {
     // check the existing user
     const existUsername = await UserModel.findOne({ username });
     // check for existing email
-   
+   if(existUsername){
+    console.log("user exists");
+    return res.status(500).json({message: "User exist"});
+   }
 
     const existEmail = await UserModel.findOne( {email });
 
 
-    const salt = await bcrypt.genSalt(10);
-
+    
+// console.log(existEmail)
 
     if (existEmail || existUsername) {
       res.json({ error: "user existt" });
     } else {
       if (password) {
-        // bcrypt
-        //   .hash(password, salt)
-        //   .then((hashedPassword) => {
+        
             const salt = await bcrypt.genSalt(10);
             const hash_password = await bcrypt.hash(password, salt);
 
@@ -59,12 +60,19 @@ export default async function register(req, res) {
             });
             console.log("Done");
             // return save result as a response
-            user
-              .save()
-              .then((result) =>
-                res.status(201).send({ msg: "User Register Successfully" })
-              )
-              .catch((error) => res.status(500).send({ error: "Not saved",msg: "Not saved" }));
+            // user
+            //   .save()
+            //   .then((result) =>
+            //     res.status(201).send({ msg: "User Register Successfully", data:JSON.stringify(result) })
+            //   )
+            //   .catch((error) => res.status(500).send({ error: "Not saved" }));
+            const saved = await user.save();
+            if(saved){
+              res.status(201).send({ msg: "User Register Successfully", data:JSON.stringify(saved) })
+            }
+            else{
+              res.status(500).send({ error: "Not saved" });
+            }
           
          
           }
