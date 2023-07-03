@@ -1,7 +1,5 @@
-// const { Int32 } = require('mongodb')
-import { Int32 } from "mongodb";
 import mongoose from "mongoose";
-// const mongoose  = require('mongoose')
+
 
 const courseSchema = new mongoose.Schema({
   code: {
