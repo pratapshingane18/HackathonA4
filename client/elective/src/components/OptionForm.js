@@ -58,31 +58,7 @@ function OptionForm() {
             </>)
           }
         </div>
-        {/* {
-          formNo === 1 && <div>
-            <div className='flex flex-col mb-2'>
-              <label htmlFor="name">Name</label>
-              <input value={state.name} onChange={inputHandle} className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md' type="text" name='name' placeholder='name' id='name' />
-            </div>
-            <div className='flex flex-col mb-2'>
-              
-                <label htmlFor="dept">Dept</label>
-              <input value={state.dept} onChange={inputHandle} className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md' type="text" name='dept' placeholder='dept name' id='dept' />
-               
- 
-
-               
-               
-            </div>
-            <div className='flex flex-col mb-2'>
-              <label htmlFor="batch">Batch</label>
-              <input value={state.batch} onChange={inputHandle} className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md' type="number" name='batch' placeholder='batch' />
-            </div>
-            <div className='mt-4 flex justify-center items-center'>
-              <button onClick={next} className='px-3 py-2 text-lg rounded-md w-full text-white bg-blue-500'>Next</button>
-            </div>
-          </div>
-        } */}
+        
 
 
 {
@@ -129,32 +105,6 @@ function OptionForm() {
       
 
 
-      {/* <div className='flex flex-col mb-2'>
-        <label htmlFor="batch">Batch</label>
-        <input
-          value={state.batch}
-          onChange={inputHandle}
-          className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
-          type="number"
-          name='batch'
-          placeholder='batch'
-        />
-      </div> */}
-      {/* <div className='flex flex-col mb-2'>
-        <label htmlFor="place">Place</label>
-        <select
-          value={state.place}
-          onChange={inputHandle}
-          className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
-          name='place'
-          id='place'
-        >
-          <option value="">Select a place</option>
-          <option value="mumbai">Mumbai</option>
-          <option value="delhi">Delhi</option>
-          <option value="bangalore">Bangalore</option>
-        </select>
-      </div> */}
       <div className='mt-4 flex justify-center items-center'>
         <button
           onClick={next}
@@ -170,10 +120,7 @@ function OptionForm() {
 
         {
           formNo === 2 && <div>
-            {/* <div className='flex flex-col mb-2'>
-              <label className='text-slate-500' htmlFor="varsity">Varsity</label>
-              <input value={state.varsity} onChange={inputHandle} className='p-2 border border-slate-400 mt-1 outline-0 text-slate-500 focus:border-blue-500 rounded-md' type="text" name='varsity' placeholder='varsity name' id='varsity' />
-            </div> */}
+         
 
 <div className='flex flex-col mb-2'>
             <label htmlFor="batch">Batch</label>
@@ -194,10 +141,7 @@ function OptionForm() {
 
 
 
-            {/* <div className='flex flex-col mb-2'>
-              <label className='text-slate-500' htmlFor="session">session</label>
-              <input value={state.session} onChange={inputHandle} className='p-2 border border-slate-400 mt-1 outline-0 text-slate-500 focus:border-blue-500 rounded-md' type="text" name='session' placeholder='session' id='session' />
-            </div> */}
+          
 
           <div className='flex flex-col mb-2'>
                   <label htmlFor="dept">Department</label>
@@ -218,27 +162,20 @@ function OptionForm() {
                   </select>
                 </div>
 
-
-
-            {/* <div className='flex flex-col mb-2'>
-              <label className='text-slate-500' htmlFor="address">Address</label>
-              <textarea value={state.address} onChange={inputHandle} row='10' className='p-2 border border-slate-400 mt-1 outline-0 text-slate-500 focus:border-blue-500 rounded-md' type="number" name='address' placeholder='address' ></textarea>
-            </div> */}
-
-
-            <div className='mt-4 gap-3 flex justify-center items-center'>
+             <div className='mt-4 gap-3 flex justify-center items-center'>
               <button onClick={pre} className='px-3 py-2 text-lg rounded-md w-full text-white bg-blue-500'>Previous</button>
               <button onClick={next} className='px-3 py-2 text-lg rounded-md w-full text-white bg-blue-500'>Next</button>
             </div>
           </div>
         }
 
-        {
-          formNo === 3 && <div>
 
+        
 
-
-<div className='flex flex-col mb-2'>
+{
+  formNo === 3 && (
+    <div>
+      <div className='flex flex-col mb-2'>
         <label htmlFor="choice1">Choice 1</label>
         <select
           value={state.choice1}
@@ -262,12 +199,13 @@ function OptionForm() {
           className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
           name='choice2'
           id='choice2'
+          disabled={!state.choice1}
         >
           <option value="">Select a subject</option>
-          <option value="Computer networks">Computer networks</option>
-          <option value="Operating system">Operating system</option>
-          <option value="DBMS">DBMS</option>
-          <option value="Data structure">Data structure</option>
+          {state.choice1 !== 'Computer networks' && <option value="Computer networks">Computer networks</option>}
+          {state.choice1 !== 'Operating system' && <option value="Operating system">Operating system</option>}
+          {state.choice1 !== 'DBMS' && <option value="DBMS">DBMS</option>}
+          {state.choice1 !== 'Data structure' && <option value="Data structure">Data structure</option>}
         </select>
       </div>
       <div className='flex flex-col mb-2'>
@@ -278,12 +216,13 @@ function OptionForm() {
           className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
           name='choice3'
           id='choice3'
+          disabled={!state.choice2}
         >
           <option value="">Select a subject</option>
-          <option value="Computer networks">Computer networks</option>
-          <option value="Operating system">Operating system</option>
-          <option value="DBMS">DBMS</option>
-          <option value="Data structure">Data structure</option>
+          {state.choice1 !== 'Computer networks' && state.choice2 !== 'Computer networks' && <option value="Computer networks">Computer networks</option>}
+          {state.choice1 !== 'Operating system' && state.choice2 !== 'Operating system' && <option value="Operating system">Operating system</option>}
+          {state.choice1 !== 'DBMS' && state.choice2 !== 'DBMS' && <option value="DBMS">DBMS</option>}
+          {state.choice1 !== 'Data structure' && state.choice2 !== 'Data structure' && <option value="Data structure">Data structure</option>}
         </select>
       </div>
       <div className='flex flex-col mb-2'>
@@ -294,36 +233,28 @@ function OptionForm() {
           className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
           name='choice4'
           id='choice4'
+          disabled={!state.choice3}
         >
           <option value="">Select a subject</option>
-          <option value="Computer networks">Computer networks</option>
-          <option value="Operating system">Operating system</option>
-          <option value="DBMS">DBMS</option>
-          <option value="Data structure">Data structure</option>
+          {state.choice1 !== 'Computer networks' && state.choice2 !== 'Computer networks' && state.choice3 !== 'Computer networks' && <option value="Computer networks">Computer networks</option>}
+          {state.choice1 !== 'Operating system' && state.choice2 !== 'Operating system' && state.choice3 !== 'Operating system' && <option value="Operating system">Operating system</option>}
+          {state.choice1 !== 'DBMS' && state.choice2 !== 'DBMS' && state.choice3 !== 'DBMS' && <option value="DBMS">DBMS</option>}
+          {state.choice1 !== 'Data structure' && state.choice2 !== 'Data structure' && state.choice3 !== 'Data structure' && <option value="Data structure">Data structure</option>}
         </select>
       </div>
 
+      <div className='mt-4 gap-3 flex justify-center items-center'>
+        <button onClick={pre} className='px-3 py-2 text-lg rounded-md w-full text-white bg-blue-500'>Previous</button>
+        <button onClick={finalSubmit} className='px-3 py-2 text-lg rounded-md w-full text-white bg-blue-500'>Submit</button>
+      </div>
+    </div>
+  )
+}
 
 
 
-            {/* <div className='flex flex-col mb-2'>
-              <label htmlFor="district">District</label>
-              <input value={state.district} onChange={inputHandle} className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md' type="text" name='district' placeholder='district name' id='district' />
-            </div>
-            <div className='flex flex-col mb-2'>
-              <label htmlFor="thana">Thana</label>
-              <input value={state.thana} onChange={inputHandle} className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md' type="text" name='thana' placeholder='thana' id='thana' />
-            </div>
-            <div className='flex flex-col mb-2'>
-              <label htmlFor="post">Post</label>
-              <input value={state.post} onChange={inputHandle} className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md' type="text" name='post' placeholder='post' id='post' />
-            </div> */}
-            <div className='mt-4 gap-3 flex justify-center items-center'>
-              <button onClick={pre} className='px-3 py-2 text-lg rounded-md w-full text-white bg-blue-500'>Previous</button>
-              <button onClick={finalSubmit} className='px-3 py-2 text-lg rounded-md w-full text-white bg-blue-500'>Submit</button>
-            </div>
-          </div>
-        }
+
+
 
       </div>
     </div>
