@@ -79,7 +79,7 @@ export default async function register(req, res) {
       }
     } catch (error) {
     throw error;
-    return res.status(500).json({error:error});
+    return res.status(500).json({error:error,msg:"NOt able to register"});
   }
 }
 
