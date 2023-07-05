@@ -1,7 +1,15 @@
 import Course from "../models/course.js";
 
 export const subjectForm = async (req, res) => {
-  res.json({ status: "success", msg: "Function is working" });
+  let data;
+  if(req.params.id){
+data = await Course.find({code:req.params.id})
+  }
+  else{
+    data = Course.find();
+  }
+
+  res.json({ status: "success", msg: "Function is working",data:data });
 };
 
 /** POST: http://localhost:8080/api/subject 

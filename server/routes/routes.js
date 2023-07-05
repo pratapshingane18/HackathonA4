@@ -7,7 +7,7 @@ import { registerMail } from '../controllers/mailer.js'
 import login from '../controllers/login.js';
 import register  from "../controllers/register.js";
 import * as course from "../controllers/course.js";
-import { allotment } from "../controllers/allotment.js";
+import * as allotment  from "../controllers/allotment.js";
 
 
 /* import middlewares */
@@ -23,7 +23,7 @@ router.route('/registerMail').post(registerMail); // send the email
 router.route('/authenticate').post(verifyUser, (req, res) => res.end()); // authenticate user
 router.route('/login').post(verifyUser,login); // login in app
 router.route('/course/submission').post(course.submission);
-router.route('/allotment').post(allotment);
+router.route('/allotment').post(allotment.allotment);
 
 /** GET Methods */
 router.route('/user/:username').get(controller.getUser) // user with username
@@ -31,6 +31,9 @@ router.route('/generateOTP').get(controller.verifyUser, localVariables, controll
 router.route('/verifyOTP').get(controller.verifyUser, controller.verifyOTP) // verify generated OTP
 router.route('/createResetSession').get(controller.createResetSession) // reset all the variables
 router.route('/subject').get(course.subjectForm);
+router.route('/subject/:id').get(course.subjectForm);
+
+router.route('/allot').get(allotment.test);
 
 /** PUT Methods */
 router.route('/updateuser').put(Auth, controller.updateUser); // is use to update the user profile

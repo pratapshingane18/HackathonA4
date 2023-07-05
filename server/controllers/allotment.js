@@ -1,8 +1,13 @@
 import Course from "../models/course.js";
 import { UserModel } from "../models/user.Model.js";
 import Allotment from "../models/allotment.js";
+import mongoose from "mongoose";
+
 
 let allot = async (data) => { 
+
+
+  const session = await mongoose.startSession();
 
 
     const user = await UserModel.findOne({ userId: data.userId });
@@ -19,7 +24,11 @@ let allot = async (data) => {
 
     if (remain === 0) {
       if (course.limit < data.cgpa) {
-        // continue;
+        session.startTransaction();
+        try{
+
+        
+        //Reference user with lowest cgpa in particular subject;
         let Id = course["last"];
 
         const user2 = await UserModel.findById(Id);
@@ -40,24 +49,28 @@ let allot = async (data) => {
             try {
               const ticket = new Allotment({
                 userId: user._id,
-                courseCode: course._id,
+                courseCode: course.code,
                 cgpa: data.cgpa,
                 preference: i + 1,
+                preferences: data.preferences,
                 type: data.type,
                 elective: data.elective,
               });
-              const save = ticket.save();
+              const save = await ticket.save();
               if (save) {
+                const mincgpa = await Allotment.findOne({courseCode:course.code}).sort('cgpa');
                 const update = await Course.updateOne(course._id, {
-                  limit: data.cgpa,
-                  last: user._id,
+                  limit: mincgpa.cgpa,
+                  last: mincgpa.userId,
                 });
                 if (update) {
+                  session.commitTransaction();
                   return ({
                     status: "success",
                     message: "Alloted Successfully",
                   });
-                } else {
+                                } else {
+                                  session.abortTransaction();
                   return ({
                     status: "failed",
                     message:
@@ -65,27 +78,36 @@ let allot = async (data) => {
                   });
                 }
               } else {
+                session.abortTransaction();
                 return ({
                   status: "failed",
                   message: "Alloted Unsuccessfully (Not saved the allotment)",
                 });
               }
             } catch (e) {
+              session.abortTransaction();
               return ({ status: "failed" });
             }
           }
         } else {
           return changePreference;
         }
-    break;
+      }catch(e){
+        session.abortTransaction();
+        return res.json({"status":"failed","message":"Error Detected",error:e})
+      }
+      
+      break;
     }
     } else {
+      session.startTransaction();
       try {
         const ticket = new Allotment({
           userId: user._id,
-          courseCode: course._id,
+          courseCode: course.code,
           cgpa: data.cgpa,
           preference: i + 1,
+          preferences: data.preferences,
           type: data.type,
           elective: data.elective,
         });
@@ -95,7 +117,7 @@ let allot = async (data) => {
         if (save) {
           let updated_data;
           if (course.limit >= data.cgpa || course.limit==0) {
-            updated_data = {
+            updated_data = { 
               remaining: remain - 1,
               limit: data.cgpa,
               last: user._id, 
@@ -108,33 +130,39 @@ let allot = async (data) => {
         const update = await Course.findByIdAndUpdate(course._id, updated_data);
         console.log(update);
           if (update) {
+            session.commitTransaction();
             return ({
               status: "success",
               message: "Alloted Successfully",
             });
           } else {
+            session.abortTransaction();
             return ({
-              status: "partial",
+              status: "failed",
               message: "Alloted Successfully but failed to update capacity",
             });
           }
         } else {
+          session.abortTransaction();
           return ({
             status: "failed",
             message: "Failed to Allot",
           });
         }
       } catch (e) {
+        session.abortTransaction();
           return (e);
             throw e;
       }
       break;
     }
   }
+  session.endSession();
   return ({
     status: "failed",
     message: "the preference is not appropriate",
   });
+
 };
 
 export const allotment = async (req, res) => {
@@ -154,3 +182,12 @@ export const allotment = async (req, res) => {
   console.log(response)
   return res.json(response);
 };
+
+
+
+export const test = async (req,res) =>{
+  const mincgpa = await Allotment.findOne({courseCode:"5CS401"}).sort({"cgpa":1});
+  const data = await Allotment.find();
+  
+  return res.send({mincgpa:mincgpa,data:data});
+}

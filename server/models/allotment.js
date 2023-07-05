@@ -10,8 +10,8 @@ const allotSchema = new Schema({
     unique: true,
   },
   courseCode: {
-    type: Schema.Types.ObjectId,
-    ref:'courses',
+    type: String,
+    unique: false,
     required: true,
   },
   cgpa: { 
