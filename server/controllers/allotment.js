@@ -185,7 +185,7 @@ export const allotment = async (req, res) => {
 
 
 
-export const test = async (req,res) =>{
+export const allot = async (req,res) =>{
   const mincgpa = await Allotment.findOne({courseCode:"5CS401"}).sort({"cgpa":1});
   const data = await Allotment.find();
   

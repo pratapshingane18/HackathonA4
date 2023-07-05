@@ -33,7 +33,7 @@ router.route('/createResetSession').get(controller.createResetSession) // reset 
 router.route('/subject').get(course.subjectForm);
 router.route('/subject/:id').get(course.subjectForm);
 
-router.route('/allot').get(allotment.test);
+router.route('/allot').get(allotment.allot);
 
 /** PUT Methods */
 router.route('/updateuser').put(Auth, controller.updateUser); // is use to update the user profile
