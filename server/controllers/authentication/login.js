@@ -1,7 +1,7 @@
-import {UserModel} from '../models/user.Model.js'
+import {UserModel} from '../../models/user.Model.js'
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import ENV from '../config/config.js';
+import ENV from '../../config/config.js';
 
 
 /** POST: http://localhost:8080/api/login 

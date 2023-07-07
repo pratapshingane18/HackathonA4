@@ -1,7 +1,17 @@
-import Allotment from "../models/allotment.js";
+import Allotment from "../../models/allotment.js";
 import allot from "./subjectAllocation.js";
 
 
+
+
+/** POST: http://localhost:8080/api/register 
+ * @param : {
+  "userId" : "2020BTECS00074",
+  "elective" : "1",
+  "cgpa": 8.9,
+  "preferences" : ["5CS401","5CS402","5CS403"]
+}
+*/
 export const allotment = async (req, res) => {
   //   const { userId, type, elective, cqpa, preferences } = req.body;
   const data = req.body;

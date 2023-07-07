@@ -1,4 +1,4 @@
-import { UserModel } from "../models/user.Model.js";
+import { UserModel } from "../../models/user.Model.js";
 import bcrypt from "bcrypt";
 
 /** POST: http://localhost:8080/api/register 
@@ -59,13 +59,7 @@ export default async function register(req, res) {
               profile: profile
             });
             console.log("Done");
-            // return save result as a response
-            // user
-            //   .save()
-            //   .then((result) =>
-            //     res.status(201).send({ msg: "User Register Successfully", data:JSON.stringify(result) })
-            //   )
-            //   .catch((error) => res.status(500).send({ error: "Not saved" }));
+           
             const saved = await user.save();
             if(saved){
               res.status(201).send({ msg: "User Register Successfully", data:JSON.stringify(saved) })

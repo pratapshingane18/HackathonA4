@@ -1,8 +1,7 @@
-import Course from "../models/course.js";
-import { UserModel } from "../models/user.Model.js";
-import Allotment from "../models/allotment.js";
+import Course from "../../models/course.js";
+import { UserModel } from "../../models/user.Model.js";
+import Allotment from "../../models/allotment.js";
 import mongoose from "mongoose";
-import { ObjectId } from "mongodb";
 
 const allot = async (data) => {
   const session = await mongoose.startSession(); // Start a session

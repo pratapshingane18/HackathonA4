@@ -11,6 +11,7 @@ export const subjectForm = async (req, res) => {
   res.json({ status: "success", msg: "Function is working", data: data });
 };
 
+
 /** POST: http://localhost:8080/api/subject 
  * @param : {
   "courseCode" : "5CS401",
