@@ -6,8 +6,7 @@ const allotSchema = new Schema({
   userId: {
     type: Schema.Types.ObjectId,
     ref:'users',
-    required: true,
-    unique: true,
+    required: true, 
   },
   courseCode: {
     type: String,

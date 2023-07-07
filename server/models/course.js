@@ -63,10 +63,10 @@ const courseSchema = new mongoose.Schema({
   last: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
-    // required: true,
+    required:false,
     default: null,
   },
 });
 
-const Course = mongoose.model("Courses", courseSchema);
+const Course = await mongoose.model("Courses", courseSchema);
 export default Course;

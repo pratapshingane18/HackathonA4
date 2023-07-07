@@ -25,6 +25,8 @@ router.route('/login').post(verifyUser,login); // login in app
 router.route('/course/submission').post(course.submission);
 router.route('/allotment').post(allotment.allotment);
 
+
+
 /** GET Methods */
 router.route('/user/:username').get(controller.getUser) // user with username
 router.route('/generateOTP').get(controller.verifyUser, localVariables, controller.generateOTP) // generate random OTP
@@ -32,8 +34,9 @@ router.route('/verifyOTP').get(controller.verifyUser, controller.verifyOTP) // v
 router.route('/createResetSession').get(controller.createResetSession) // reset all the variables
 router.route('/subject').get(course.subjectForm);
 router.route('/subject/:id').get(course.subjectForm);
+router.route('/allot').get(allotment.allData);
 
-router.route('/allot').get(allotment.allot);
+
 
 /** PUT Methods */
 router.route('/updateuser').put(Auth, controller.updateUser); // is use to update the user profile
@@ -42,36 +45,3 @@ router.route('/resetPassword').put(controller.verifyUser, controller.resetPasswo
 
 
 export default router;
-
-// const express = require('express')
-// const router = express.Router();
-// const path = require('path')
-
-// //Controllers
-// const register = require('../controller/register')
-
-
-
-
-// //GET Request:
-
-// router.get("/",(req,res)=>{
-//     res.send("Hello");
-// })
-
-// //For posting judge and lawyer list as response
-// router.get("/addCase",admin.PostData);
-
-
-// //Post Request:
-
-
-// router.post("/register",register.register);
-
-// //For Login: req.body -> user_id, password
-// router.post("/login",register.login);
-   
-
-
-
-// module.exports = router;
