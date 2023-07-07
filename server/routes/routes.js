@@ -24,8 +24,8 @@ router.route('/registerMail').post(registerMail); // send the email
 // router.route('/authenticate').post(controller.verifyUser, (req, res) => res.end()); // authenticate user
 router.route('/authenticate').post(verifyUser, (req, res) => res.end()); // authenticate user
 router.route('/login').post(verifyUser,login); // login in app
-router.route('/course/submission').post(course.submission);
-router.route('/allotment').post(allotment.allotment);
+router.route('/course/submission').post(verifyUser,course.submission);
+router.route('/allotment').post(verifyUser,allotment.allotment);
 
 
 
