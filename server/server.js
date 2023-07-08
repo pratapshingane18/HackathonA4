@@ -3,6 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import connect from './database/conn.js';
 import router from './routes/routes.js';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan('tiny'));
 app.disable('x-powered-by'); // less hackers know about our stack
+app.use(cookieParser());
 
 
 const port = 8080;

@@ -29,6 +29,11 @@ export default async function login(req,res){
                                         userId : user.userId
                                     }, ENV.JWT_SECRET , { expiresIn : "24h"});
   
+                                    res.cookie('token', token, {
+                                        maxAge: 3600000*24, // Expiration time in milliseconds (24 hour)
+                                        // secure: true, // Cookie is only sent over HTTPS
+                                        sameSite: 'Strict' // Restrict cookie to same-site requests only
+                                      });
                         return res.status(200).send({
                             msg: "Login Successful...!",
                             userId: user.userId,
