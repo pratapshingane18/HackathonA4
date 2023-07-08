@@ -8,8 +8,8 @@ import useFetch from '../hooks/fetch.hook';
 import { updateUser } from '../helper/helper'
 import { useNavigate } from 'react-router-dom'
 
-import styles from '../styles/Username.module.css';
-import extend from '../styles/Profile.module.css'
+import styles from '../Styles/Username.module.css';
+import extend from '../Styles/Profile.module.css'
 
 export default function Profile() {
 

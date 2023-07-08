@@ -6,7 +6,7 @@ import { useFormik } from 'formik';
 import { usernameValidate } from '../helper/validate'
 import { useAuthStore } from '../store/store'
 
-import styles from '../styles/Username.module.css';
+import styles from '../Styles/Username.module.css';
 
 export default function Username() {
 
