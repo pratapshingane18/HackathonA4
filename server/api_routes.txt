@@ -1,0 +1,82 @@
+Api call links
+
+GET Request
+1. Course Display
+http://localhost:8080/api/subject
+Response: 
+{
+    "status": "success",
+    "msg": "Function is working",
+    "data": [
+        {
+            _id: "64a308f41dc2e65451c3af07",//not to be displayed
+            code: "5CS401",
+            name: "Artificial Intelligence",
+            degree: "Btech",
+            department: "CSE",
+            year: 3,
+            type: "professional",
+            elective: "1",
+            credits: 3,
+            capacity: 4, //not to be diplayed
+            remaining: 0, //not to be displayed
+            limit: 8.2, //not to be displayed
+            last: "64a31599342291abede79fba", //not to be displayed
+            __v: 0 //not to be displayed
+        }
+    ]
+}
+
+
+POST Request
+1. Register 
+http://localhost:8080/api/register
+Data:
+{
+  userId : String,
+  password : String,
+  email: String,
+  firstName : String,
+  lastName:String,
+  mobile: Number,
+  address : String,
+  profile: blank
+}
+
+
+2. Login 
+http://localhost:8080/api/login
+{
+  userId : String,
+  password : String
+}
+
+
+3. Allotment 
+{
+    userId: prn(String),
+    type: String,
+     elective:String ("1" or "2"), 
+     cgpa:Number,
+     preferences:["5CS401","5CS402","5CS403"](Course code)
+}
+
+4. Course 
+http://localhost:8080/api/course/submission
+{
+  courseCode : "5CS404",
+  courseName : "Computer Graphics",
+  department: "CSE",
+degree: "Btech",
+  year : 3,
+  type: "professional",
+  elective: "1",
+  credits: 3,
+  capacity : 10,
+  remaining: 10,
+  limit: 0
+}
+
+
+
+

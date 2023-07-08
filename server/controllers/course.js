@@ -1,14 +1,22 @@
 import Course from "../models/course.js";
 
 export const subjectForm = async (req, res) => {
-  let data;
-  if (req.params.id) {
-    data = await Course.find({ code: req.params.id });
-  } else {
-    data = Course.find();
-  }
+  try{
 
-  res.json({ status: "success", msg: "Function is working", data: data });
+    let data;
+  
+    if (req.params.id) {
+      data = await Course.find({ department: req.params.id });
+    } else {
+      data = await Course.find();
+    }
+    
+    res.json({ status: "success", msg: "Courses to be displayed", data: data });
+
+  }catch(e){
+    console.log(e);
+    res.json({status:"failed",message:"Not able to fetch data"})
+  }
 };
 
 
